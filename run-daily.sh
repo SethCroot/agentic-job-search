@@ -16,5 +16,8 @@ set -a; source "$PROJECT_DIR/.env" 2>/dev/null; set +a
 # --score-only: skip cover letters (handled separately)
 python3 -m src.main --score-only --verbose 2>&1
 
+# Fetch descriptions for newly scored jobs (LinkedIn returns None via JobSpy)
+python3 -m src.description_fetcher 2>&1
+
 # Rebuild kanban board from current vault state
 python3 src/rebuild_kanban.py 2>&1

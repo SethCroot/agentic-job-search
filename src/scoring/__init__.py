@@ -101,14 +101,43 @@ JSON only: {{"location_score": 1-10, "experience_score": 1-10, "skills_score": 1
             }
     
     def score_jobs(self, jobs: list[dict]) -> list[dict]:
-        """Score multiple jobs and attach scores."""
+        """Score multiple jobs and attach scores. Aborts if error rate exceeds 50%."""
         scored = []
         total = len(jobs)
+        errors = 0
+        consecutive_errors = 0
+        
         for idx, job in enumerate(jobs):
             print(f"[{datetime.now().strftime('%H:%M:%S')}] Scoring job {idx+1}/{total}: {job.get('title', 'N/A')}")
             score_result = self.score_job(job)
             job["score"] = score_result
             scored.append(job)
+            
+            # Track errors
+            if score_result.get("weighted_total", 0) == 0 and "Scoring error" in score_result.get("reasoning", ""):
+                errors += 1
+                consecutive_errors += 1
+            else:
+                consecutive_errors = 0
+            
+            # Abort: 5 consecutive errors = API is down
+            if consecutive_errors >= 5:
+                print(f"\n{'='*50}")
+                print(f"[ABORT] 5 consecutive scoring failures. API is likely down or rate-limited.")
+                print(f"[ABORT] Last error: {score_result.get('reasoning', 'unknown')}")
+                print(f"{'='*50}")
+                break
+            
+            # Warn: >50% error rate
+            if errors > 0 and (idx + 1) >= 10:
+                error_rate = errors / (idx + 1)
+                if error_rate > 0.5:
+                    print(f"\n[WARNING] {error_rate:.0%} error rate ({errors}/{idx+1}). Scoring may be failing silently.")
+        
+        if errors > 0:
+            print(f"\n[SUMMARY] Scoring errors: {errors}/{len(scored)} ({errors/len(scored):.0%})")
+            if errors / len(scored) > 0.5:
+                print(f"[ERROR] Majority of scoring calls failed. Results are unreliable.")
         
         # Sort by score descending
         scored.sort(key=lambda x: x.get("score", {}).get("weighted_total", 0), reverse=True)

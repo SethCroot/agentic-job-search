@@ -184,42 +184,48 @@ def apply_for_job(
         print(f"  ✓ Resume PDF: {resume_path.name}")
         results["resume_path"] = str(resume_path)
 
-    # Step 4: Update or create job.md in the subdirectory
+    # Step 4: Update job.md in the subdirectory
     job_md_path = output_dir / "job.md"
-    if job_file != job_md_path:
-        # Copy/update the job file into the subdirectory
-        if job_md_path.exists():
-            md_content = job_md_path.read_text()
+    
+    # Read existing content (file should already be in the subdirectory)
+    if job_md_path.exists():
+        md_content = job_md_path.read_text()
+    elif job_file != job_md_path:
+        md_content = content
+    else:
+        md_content = content
+
+    # Update frontmatter
+    updates = {
+        "cover_letter_status": "Generated",
+        "status": "Applying",
+    }
+    if results.get("cover_letter_path"):
+        updates["cover_letter_path"] = results["cover_letter_path"]
+    if results.get("resume_path"):
+        updates["resume_path"] = results["resume_path"]
+
+    for key, value in updates.items():
+        pattern = rf"^{re.escape(key)}:.*$"
+        new_line = f"{key}: {value}"
+        if re.search(pattern, md_content, re.MULTILINE):
+            md_content = re.sub(pattern, new_line, md_content, flags=re.MULTILINE)
         else:
-            md_content = content
+            # Add before closing --- of frontmatter
+            md_content = md_content.replace("---\n\n", f"{new_line}\n---\n\n", 1)
 
-        # Update frontmatter
-        updates = {"cover_letter_status": "Generated"}
-        if results.get("cover_letter_path"):
-            updates["cover_letter_path"] = results["cover_letter_path"]
-        if results.get("resume_path"):
-            updates["resume_path"] = results["resume_path"]
+    # Add PDF links section
+    pdf_links = "\n## Application Materials\n"
+    if results.get("cover_letter_path"):
+        pdf_links += "- [[SethCroot_Cover Letter.pdf|Cover Letter]]\n"
+    if results.get("resume_path"):
+        pdf_links += "- [[SethCroot_Resume.pdf|Resume]]\n"
 
-        for key, value in updates.items():
-            pattern = rf"^{key}:.*$"
-            new_line = f"{key}: {value}"
-            if re.search(pattern, md_content, re.MULTILINE):
-                md_content = re.sub(pattern, new_line, md_content, flags=re.MULTILINE)
-            else:
-                md_content = md_content.replace("---\n\n", f"{new_line}\n---\n\n", 1)
+    if "## Application Materials" not in md_content:
+        md_content += pdf_links
 
-        # Add PDF links section
-        pdf_links = "\n## Application Materials\n"
-        if results.get("cover_letter_path"):
-            pdf_links += f"- [[SethCroot_Cover Letter.pdf|Cover Letter]]\n"
-        if results.get("resume_path"):
-            pdf_links += f"- [[SethCroot_Resume.pdf|Resume]]\n"
-
-        if "## Application Materials" not in md_content:
-            md_content += pdf_links
-
-        job_md_path.write_text(md_content)
-        print(f"  ✓ Job file: {job_md_path.relative_to(jobs_dir)}")
+    job_md_path.write_text(md_content)
+    print(f"  ✓ Job file updated: {job_md_path.relative_to(jobs_dir)}")
 
     results["success"] = True
     return results
