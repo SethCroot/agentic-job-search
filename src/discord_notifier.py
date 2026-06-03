@@ -13,15 +13,15 @@ def send_discord_start():
     """Notify Discord when pipeline starts."""
     message = f"""🔍 **Job Search Pipeline Running**
 
-**Started:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} AEST
+**Started:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} PT
 **Status:** In progress (discovery/scoring phase)
 **Config:** 7 searches across LinkedIn + Indeed for Vancouver BC + remote
 
 **Will report back when complete with:**
 - Jobs discovered
 - Jobs scored (GLM-4.7)
-- Jobs passing threshold (≥6.0/10)
-- Cover letters generated
+- Jobs passing threshold (≥7.5/10)
+- Written to Obsidian inbox for review
 
 _Hank (Hermes Agent)_"""
 
@@ -42,15 +42,15 @@ def send_discord_summary(results: dict, duration_minutes: float = 0):
 **Jobs Discovered:** {results.get('discovered', 0)}
 **Jobs Scored:** {results.get('scored', 0)}
 **Jobs Passing Threshold:** {results.get('passed', 0)}
-**Cover Letters Generated:** {results.get('cover_letters', 0)}
+**Deduped:** {results.get('deduped', 0)} | **Pre-filtered:** {results.get('filtered_title', 0) + results.get('filtered_location', 0)}
 
 **Top 5 Matches:**
 {chr(10).join([f"• {j.get('title')} at {j.get('company')} — {j.get('score', {}).get('weighted_total', 0)}/10" for j in results.get('top_jobs', [])[:5]])}
 
 **Errors:** {len(results.get('errors', []))}
 
-_Jobs written to vault: `Career/Jobs/`_
-_Daily digest: `Daily/{datetime.now().strftime('%Y-%m-%d')}.md`_
+_Jobs written to inbox: `00-Inbox/` → routed to `06-Career/Jobs/`_
+_Daily digest: `01-Daily/{datetime.now().strftime('%Y-%m-%d')}.md`_
 
 _Hank (Hermes Agent)_"""
 

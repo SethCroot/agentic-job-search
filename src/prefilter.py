@@ -11,19 +11,23 @@ from pathlib import Path
 from .config import Config
 
 
-# Titles containing these keywords (case-insensitive) are auto-rejected.
-# These are clearly NOT target roles for an Integration Support Analyst.
-REJECT_TITLE_KEYWORDS = [
-    "cashier", "stock associate", "shelf stocker", "loader", "driver",
-    "cook", "dishwasher", "janitor", "cleaner", "security guard",
-    "bartender", "barista", "server", "waiter", "waitress", "host",
-    "retail associate", "sales associate", "floor associate",
-    "warehouse worker", "forklift", "delivery driver", "courier",
-    "babysitter", "nanny", "dog walker", "pet sitter",
-    "intern", "apprentice", "volunteer", "unpaid",
-    "beauty advisor", "makeup artist", "stylist",
-    "front desk", "receptionist", "cash office",
+# Titles matching these regex patterns (case-insensitive) are auto-rejected.
+# Using word boundaries (\b) to avoid false positives like "internal" matching "intern".
+REJECT_TITLE_PATTERNS = [
+    r"\bcashier\b", r"\bstock associate\b", r"\bshelf stocker\b", r"\bloader\b",
+    r"\bdriver\b", r"\bcook\b", r"\bdishwasher\b", r"\bjanitor\b", r"\bcleaner\b",
+    r"\bsecurity guard\b", r"\bbartender\b", r"\bbarista\b", r"\bserver\b",
+    r"\bwaiter\b", r"\bwaitress\b", r"\bhost\b", r"\bretail associate\b",
+    r"\bsales associate\b", r"\bfloor associate\b", r"\bwarehouse worker\b",
+    r"\bforklift\b", r"\bdelivery driver\b", r"\bcourier\b",
+    r"\bbabysitter\b", r"\bnanny\b", r"\bdog walker\b", r"\bpet sitter\b",
+    r"\bintern(?:ship)?\b", r"\bapprentice\b", r"\bvolunteer\b", r"\bunpaid\b",
+    r"\bbeauty advisor\b", r"\bmakeup artist\b", r"\bstylist\b",
+    r"\bfront desk\b", r"\breceptionist\b", r"\bcash office\b",
 ]
+
+# Pre-compile patterns for performance
+_REJECT_COMPILED = [re.compile(p, re.IGNORECASE) for p in REJECT_TITLE_PATTERNS]
 
 # If location contains none of these, it's likely outside target area.
 # "Remote" is included since Seth accepts remote roles.
@@ -127,10 +131,10 @@ class JobPreFilter:
             title = str(job.get("title", "")).lower()
             location = str(job.get("location", "")).lower()
 
-            # Check title against reject list
+            # Check title against reject patterns (word-boundary safe)
             rejected = False
-            for keyword in REJECT_TITLE_KEYWORDS:
-                if keyword in title:
+            for pattern in _REJECT_COMPILED:
+                if pattern.search(title):
                     stats["rejected_title"] += 1
                     rejected = True
                     break

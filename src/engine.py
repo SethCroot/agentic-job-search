@@ -38,7 +38,8 @@ class PipelineEngine:
         
         # Phase 1: Discover jobs
         print(f"[{datetime.now().strftime('%H:%M:%S')}] [1/5] Discovering jobs...")
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Running 7 searches across LinkedIn + Indeed...")
+        num_searches = len(self.config.searches.get('searches', []))
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Running {num_searches} searches across LinkedIn + Indeed...")
         try:
             df = self.scraper.discover_jobs(hours_old=24)
             results["discovered"] = len(df)
@@ -99,7 +100,7 @@ class PipelineEngine:
 
         # Mark ALL scored jobs as seen (even failures) so they're never re-scored
         self.prefilter.mark_all_seen(scored_jobs)
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Scoring complete: {len(passing)} jobs passed threshold (≥{self.config.scoring_rules.get('threshold', 6.0)})")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Scoring complete: {len(passing)} jobs passed threshold (≥{self.config.scoring_rules.get('threshold', 7.5)})")
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {len(scored_jobs)} jobs marked as seen in dedup database")
         
         if score_only:
