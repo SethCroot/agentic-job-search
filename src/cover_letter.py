@@ -13,7 +13,7 @@ class CoverLetterGenerator:
             api_key=config.ai.get("api_key", ""),
             base_url=config.ai.get("base_url", "https://open.bigmodel.cn/api/coding/paas/v4"),
         )
-        self.timeout = 30.0  # Default timeout for API calls
+        self.timeout = 60.0  # GLM-4.7 can be slow
         self.model = config.ai.get("model", "glm-4.7")
     
     def generate(self, job: dict, tailoring: dict) -> str:

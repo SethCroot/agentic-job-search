@@ -1,0 +1,42 @@
+{
+  "summary": "Integration Analyst with 5 years of experience managing enterprise integrations and providing Tier 1/2 support for Windows environments. Experienced in vendor coordination, incident response, and change impact assessment, with a strong foundation in cybersecurity suitable for infrastructure migration and support.",
+  "highlighted_experience": [
+    {
+      "bullet": "Provided Tier 1/2 support for Windows workstations across a large-scale retail environment",
+      "relevance": "Directly aligns with the job requirement to troubleshoot desktop, software, and device-related issues across Windows environments."
+    },
+    {
+      "bullet": "Managed user access controls and identity provisioning",
+      "relevance": "Matches the responsibility for managing user accounts, permissions, and access control within the Microsoft 365 and systems administration scope."
+    },
+    {
+      "bullet": "Served as primary liaison between Cotton On and enterprise vendors (KPMG, UKG, Oracle) for payroll system integrations",
+      "relevance": "Demonstrates the necessary vendor coordination skills required for managing hardware, software, and telecom support contracts."
+    },
+    {
+      "bullet": "Conducted change impact assessments for Oracle HCM and UKG Dimensions maintenance releases, validating data integrity prior to deployment",
+      "relevance": "Relevant to the migration planning responsibilities, specifically for documenting, planning, and executing changes while ensuring system integrity."
+    },
+    {
+      "bullet": "Standardised and maintained integration architecture documentation across Southeast Asia, the Middle East and Latin America, improving onboarding consistency and reducing time-to-productivity for new integration partners",
+      "relevance": "Supports the requirement to maintain IT documentation, policies, system configurations, and support procedures during the migration process."
+    }
+  ],
+  "highlighted_skills": [
+    "Vendor liaison: Oracle, UKG, KPMG, Maersk",
+    "Change impact assessment",
+    "Major incident response & coordination",
+    "Technical documentation",
+    "Bachelor of Information Technology (Cybersecurity)",
+    "Azure Logic Apps / Function Apps / Service Bus",
+    "KnowledgeMap \u2013 UKG Dimensions (10-Course Series) Online"
+  ],
+  "skill_gaps": [
+    "Microsoft 365 tenant administration",
+    "macOS, iOS, and Android support",
+    "IT asset inventory and lifecycle management",
+    "Phone network/VoIP migration",
+    "General CRM platform administration (outside of HR systems)"
+  ],
+  "tailoring_notes": "The candidate's experience was reordered to prioritize the Service Desk Analyst role (Windows support, user access) to meet the primary IT support focus, followed by the People Systems and Integration Analyst roles to highlight vendor coordination and change management skills relevant to the migration project. The summary emphasizes the blend of hands-on support and high-level project coordination. Gaps were identified for specific OS support (Mac/iOS/Android) and explicit M365/Asset Management experience."
+}

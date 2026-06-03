@@ -23,7 +23,7 @@ If the job requires skills not in the facts, note them as gaps, do not fake them
             api_key=config.ai.get("api_key", ""),
             base_url=config.ai.get("base_url", "https://open.bigmodel.cn/api/coding/paas/v4"),
         )
-        self.timeout = 30.0  # Default timeout for API calls
+        self.timeout = 90.0  # GLM-4.7 can be very slow for longer outputs
         self.model = config.ai.get("model", "glm-4.7")
     
     def tailor_for_job(self, job: dict) -> dict:
@@ -54,21 +54,34 @@ Respond with ONLY valid JSON:
   "tailoring_notes": "<what was reordered/emphasized and why>"
 }}"""
 
+        raw_text = ""
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.2,
-                max_tokens=500,
+                max_tokens=600,
                 timeout=self.timeout,
             )
             
-            text = response.choices[0].message.content.strip()
+            raw_text = response.choices[0].message.content.strip()
+            text = raw_text
             if "```json" in text:
                 text = text.split("```json")[1].split("```")[0].strip()
             elif "```" in text:
                 text = text.split("```")[1].split("```")[0].strip()
             
-            return json.loads(text)
+            result = json.loads(text)
+            return result
+        except json.JSONDecodeError as e:
+            # Try to extract valid JSON from the response
+            import re
+            json_match = re.search(r'\{[\s\S]*\}', raw_text)
+            if json_match:
+                try:
+                    return json.loads(json_match.group())
+                except json.JSONDecodeError:
+                    pass
+            return {"error": f"JSON parse failed: {e}", "summary": "", "highlighted_experience": [], "highlighted_skills": []}
         except Exception as e:
             return {"error": str(e), "summary": "", "highlighted_experience": [], "highlighted_skills": []}

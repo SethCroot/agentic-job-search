@@ -1,0 +1,21 @@
+Seth Croot
+Vancouver, BC
+
+[Date]
+
+Hiring Manager
+ABMTAX
+
+Re: Application for Internal IT Support Technician
+
+Dear Hiring Manager,
+
+I am writing to express my interest in the Internal IT Support Technician position at ABMTAX. With a Bachelor of Information Technology in Cybersecurity and five years of experience at Cotton On Group, I am eager to apply my technical background to support your internal IT infrastructure and assist in the critical project of migrating your environment in-house.
+
+My experience is directly relevant to the support and migration responsibilities of this role. As a Service Desk Analyst, I provided Tier 1/2 support for Windows workstations across a large-scale retail environment and managed user access controls and identity provisioning, aligning with your needs for Microsoft 365 administration and device troubleshooting. In my subsequent roles as a People Systems Support Analyst and Integration Analyst, I conducted change impact assessments for maintenance releases to validate data integrity prior to deployment and served as the primary liaison with enterprise vendors such as Oracle, UKG, and KPMG. Additionally, I standardized integration architecture documentation across multiple regions to improve onboarding consistency, a skill that will support ABMTAX in documenting and executing phased migrations with minimal disruption.
+
+I am enthusiastic about the opportunity to leverage my technical skills and project coordination experience to ensure a secure and efficient transition for ABMTAX’s systems. I am available to discuss how my qualifications meet your needs and look forward to hearing from you.
+
+Sincerely,
+
+Seth Croot
