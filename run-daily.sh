@@ -11,5 +11,7 @@ cd "$PROJECT_DIR"
 
 # Run pipeline: discover -> dedup -> pre-filter -> score -> write to vault
 # --score-only: skip cover letters (handled separately)
-# --no-discord: we handle notifications via the cron job itself
 python3 -m src.main --score-only --verbose 2>&1
+
+# Rebuild kanban board from current vault state
+python3 src/rebuild_kanban.py 2>&1

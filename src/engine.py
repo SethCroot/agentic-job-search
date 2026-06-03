@@ -150,6 +150,18 @@ class PipelineEngine:
         # Daily digest
         self.vault.write_daily_digest(results)
 
+        # Rebuild kanban board from vault state
+        try:
+            from .rebuild_kanban import main as rebuild_kanban
+            import sys
+            old_argv = sys.argv
+            sys.argv = ["rebuild_kanban"]
+            rebuild_kanban()
+            sys.argv = old_argv
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kanban board rebuilt")
+        except Exception as e:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kanban rebuild skipped: {e}")
+
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Daily digest written to {self.config.daily_dir / datetime.now().strftime('%Y-%m-%d.md')}")
         print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Pipeline complete. {results['passed']} jobs ready for review.")
         return results
