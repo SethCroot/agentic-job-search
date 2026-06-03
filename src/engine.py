@@ -89,9 +89,10 @@ class PipelineEngine:
             return results
         
         # Phase 4: Score jobs
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] [4/5] Scoring {len(jobs)} jobs with GLM-4.7...")
-        estimated_min = len(jobs) * 10 / 60
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Estimated: ~{estimated_min:.0f} minutes ({len(jobs)} jobs × ~10s each)")
+        model_name = self.config.ai.get("model", "unknown")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] [4/5] Scoring {len(jobs)} jobs with {model_name}...")
+        estimated_min = len(jobs) * 3 / 60
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Estimated: ~{estimated_min:.0f} minutes ({len(jobs)} jobs × ~3s each)")
         scored_jobs = self.scorer.score_jobs(jobs)
         passing = [j for j in scored_jobs if j.get("score", {}).get("passes_threshold", False)]
         results["scored"] = len(scored_jobs)
