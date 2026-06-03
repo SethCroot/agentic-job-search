@@ -1,0 +1,6 @@
+provider: zai
+base_url: https://open.bigmodel.cn/api/coding/paas/v4
+model: glm-4.7
+api_key_env: GLM_API_KEY
+max_tokens: 4096
+temperature: 0.3

@@ -1,0 +1,15 @@
+#!/bin/bash
+# Daily job search pipeline wrapper
+# Run by Hermes cron at 06:00 PT daily
+
+set -euo pipefail
+
+PROJECT_DIR="/opt/data/seth-jobsearch-auto"
+export PYTHONPATH="/opt/data/.pylibs:src"
+
+cd "$PROJECT_DIR"
+
+# Run pipeline: discover -> dedup -> pre-filter -> score -> write to vault
+# --score-only: skip cover letters (handled separately)
+# --no-discord: we handle notifications via the cron job itself
+python3 -m src.main --score-only --verbose 2>&1

@@ -1,0 +1,28 @@
+personal:
+  name: "Seth Croot"
+  location: "Vancouver, BC"
+  email: "Seth.croot@proton.me"
+  phone: ""  # Add if available
+  linkedin: "linkedin.com/in/seth-croot"
+
+target_roles:
+  - "IT Support"
+  - "Service Desk"
+  - "Help Desk"
+  - "IT Specialist"
+  - "Integration Specialist"
+  - "Technical Support"
+
+target_employers:
+  - "Aritzia"
+  - "Arc'teryx"
+  - "Lululemon"
+  - "Shopify"
+  - "Best Buy"
+  - "London Drugs"
+
+preferences:
+  location: "Vancouver, BC"
+  work_style: "onsite/hybrid"
+  salary_min: null
+  industry: "retail"

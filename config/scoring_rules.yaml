@@ -1,0 +1,22 @@
+weights:
+  location: 0.40
+  experience: 0.30
+  skills: 0.30
+threshold: 7.5
+location_scoring:
+  exact_city: 10
+  metro_area: 8
+  same_province: 5
+  remote: 7
+  other: 2
+experience_scoring:
+  exact_match: 10
+  related: 7
+  transferable: 5
+  no_match: 2
+skills_scoring:
+  all_required: 10
+  most_required: 8
+  some_required: 6
+  few_required: 3
+  none: 0

@@ -1,0 +1,44 @@
+searches:
+  - query: "IT Support"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "Service Desk"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "Help Desk"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "IT Specialist"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "Integration Specialist"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "Technical Support"
+    location: "Vancouver, BC"
+    distance: 25
+    job_boards:
+      - linkedin
+      - indeed
+  - query: "IT Support"
+    location: "Canada"
+    distance: null
+    job_boards:
+      - linkedin
+      - indeed
+    remote_only: true

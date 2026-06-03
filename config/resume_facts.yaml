@@ -1,0 +1,83 @@
+# VERIFIED FACTS ONLY - NO FABRICATION PERMITTED
+# The tailoring engine may reorder or emphasize these facts but NEVER invent new ones.
+
+personal:
+  name: "Seth Croot"
+  location: "Vancouver, BC"
+
+summary: |
+  Integration Analyst with 5 years at Cotton On Group managing 80+ enterprise integrations across 9 countries. Experienced in end-to-end integration support, vendor coordination, change impact assessment and major incident response across retail, payroll and logistics systems.
+
+experience:
+  - title: "Integration Analyst"
+    company: "Cotton On Group"
+    location: "Geelong, VIC"
+    dates: "December 2023 – Present"
+    bullets:
+      - "Manage a portfolio of enterprise integrations covering marketplace, inventory, payroll and customer data flows"
+      - "Diagnose and resolve REST API failures across third-party vendor integrations using structured triage documentation and direct vendor escalation"
+      - "Lead major incident communications during outages, coordinating resolution and providing timely stakeholder updates"
+      - "Maintain integration architecture documentation to support partner onboarding and team knowledge transfer"
+      - "Serve as primary point of contact between the Integration Services team and enterprise vendors including Oracle, UKG, Maersk and Adyen"
+      - "Resolved an emergency failure in the Adyen refund integration where a batch sequencing defect was preventing refund files from generating. Identified the root cause, manually reprocessed affected transactions across all merchant accounts and restored the pipeline within the same business day"
+      - "Identified and resolved a defect in the Maersk freight integration where Delivery Terms changes were being excluded from purchase order updates, causing Maersk to operate on incorrect freight incoterms. Diagnosed the stored procedure fault, deployed a fix and manually remediated the affected purchase order"
+      - "Standardised and maintained integration architecture documentation across Southeast Asia, the Middle East and Latin America, improving onboarding consistency and reducing time-to-productivity for new integration partners"
+
+  - title: "People Systems Support Analyst"
+    company: "Cotton On Group"
+    location: "Geelong, VIC"
+    dates: "July 2022 – December 2023"
+    bullets:
+      - "Conducted change impact assessments for Oracle HCM and UKG Dimensions maintenance releases, validating data integrity prior to deployment"
+      - "Served as primary liaison between Cotton On and enterprise vendors (KPMG, UKG, Oracle) for payroll system integrations"
+      - "Led major incident communications during system outages, coordinating resolution and providing timely stakeholder updates"
+      - "Monitored payroll integrations proactively to identify and resolve issues prior to processing deadlines"
+      - "Identified and resolved a silent failure defect across four Preceda payroll integrations where missing source files were returning a success status rather than an error, causing failures to go undetected. Implemented proper error handling across all four integrations to ensure failures generate alerts and can be acted upon"
+      - "Strengthened vendor security posture across payroll integrations by embedding security-first review processes into the maintenance release analysis workflow"
+
+  - title: "Service Desk Analyst"
+    company: "Cotton On Group"
+    location: "Geelong, VIC"
+    dates: "October 2020 – June 2022"
+    bullets:
+      - "Provided Tier 1/2 support for Windows workstations across a large-scale retail environment"
+      - "Managed user access controls and identity provisioning"
+      - "Developed standardised troubleshooting procedures that reduced repeat incidents"
+      - "Escalated and coordinated resolution of complex issues across IT teams"
+      - "Received the Cotton On YOU Award twice, a peer nomination recognising company values (Keeping it Real, Ever Better, Personal Leadership), for consistently delivering excellent customer service on the Service Desk"
+      - "Progressed from Tier 1 to Tier 2 support responsibilities, taking on more complex integration-adjacent issues"
+
+skills:
+  technical:
+    - "Azure Logic Apps / Function Apps / Service Bus"
+    - "Oracle Integration Cloud (OIC)"
+    - "REST API troubleshooting & documentation"
+    - "SQL Server, PostgreSQL, SQLite"
+    - "Linux, Ubuntu, systemd, Docker"
+    - "Vendor liaison: Oracle, UKG, KPMG, Maersk"
+    - "Change impact assessment"
+    - "Major incident response & coordination"
+    - "Technical documentation"
+    - "Business analysis & requirements gathering"
+    - "Python"
+    - "FastAPI"
+    - "SQLite database schema design"
+    - "OAuth 2.0 token lifecycle management"
+    - "systemd service management"
+  soft:
+    - "Stakeholder communication"
+    - "Vendor relationship management"
+    - "Cross-team coordination"
+    - "Problem-solving under pressure"
+    - "Documentation and knowledge transfer"
+  certifications:
+    - "Bachelor of Information Technology (Cybersecurity) — Deakin University (2020)"
+    - "Business Analyst Certification — RMIT University Online (July 2025)"
+    - "KnowledgeMap — UKG Dimensions (10-Course Series) Online (March 2023)"
+
+education:
+  - degree: "Bachelor of Information Technology (Cybersecurity)"
+    institution: "Deakin University"
+    year: "2020"
+
+# DO NOT ADD ANYTHING NOT VERIFIED BY SETH

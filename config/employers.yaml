@@ -1,0 +1,19 @@
+employers:
+  - name: Aritzia
+    location: Vancouver, BC
+    priority: high
+  - name: Arc'teryx
+    location: North Vancouver, BC
+    priority: high
+  - name: Lululemon
+    location: Vancouver, BC
+    priority: high
+  - name: Shopify
+    location: Remote / Toronto, ON
+    priority: medium
+  - name: Best Buy
+    location: Canada-wide
+    priority: medium
+  - name: London Drugs
+    location: BC-based
+    priority: high
