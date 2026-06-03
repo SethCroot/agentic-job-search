@@ -49,7 +49,7 @@ class JobScraper:
                 site_names.append(board_map[board])
         
         if not site_names:
-            site_names = ["indeed"]
+            site_names = ["linkedin"]
         
         kwargs = {
             "site_name": site_names,

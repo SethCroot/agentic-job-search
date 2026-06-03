@@ -105,7 +105,30 @@ class PipelineEngine:
         
         if score_only:
             print("  [score-only mode] Skipping tailoring and cover letters.")
-            self.vault.write_daily_digest(results)
+
+        # Write passing jobs to vault (runs in both score-only and full mode)
+        if passing and not self.dry_run:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Writing {len(passing)} jobs to Obsidian vault...")
+            for job in passing:
+                try:
+                    self.vault.write_job(job)
+                except Exception as e:
+                    results["errors"].append(f"Vault write failed for {job.get('title')}: {e}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Vault writes complete")
+
+        # Rebuild kanban board from vault state
+        try:
+            from .rebuild_kanban import main as rebuild_kanban
+            import sys as _sys
+            _saved_argv = _sys.argv
+            _sys.argv = ["rebuild_kanban"]
+            rebuild_kanban()
+            _sys.argv = _saved_argv
+        except Exception as e:
+            results["errors"].append(f"Kanban rebuild failed: {e}")
+
+        self.vault.write_daily_digest(results)
+        if score_only:
             return results
         
         if not passing:
@@ -135,33 +158,6 @@ class PipelineEngine:
                 job["cover_letter"] = ""
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Tailoring complete: {results['cover_letters']} cover letters generated")
-        
-        # Write to vault
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Writing {len(passing)} jobs to Obsidian vault...")
-        for job in passing:
-            if not self.dry_run:
-                try:
-                    self.vault.write_job(job)
-                except Exception as e:
-                    results["errors"].append(f"Vault write failed for {job.get('title')}: {e}")
 
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Vault writes complete")
-
-        # Daily digest
-        self.vault.write_daily_digest(results)
-
-        # Rebuild kanban board from vault state
-        try:
-            from .rebuild_kanban import main as rebuild_kanban
-            import sys
-            old_argv = sys.argv
-            sys.argv = ["rebuild_kanban"]
-            rebuild_kanban()
-            sys.argv = old_argv
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kanban board rebuilt")
-        except Exception as e:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Kanban rebuild skipped: {e}")
-
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Daily digest written to {self.config.daily_dir / datetime.now().strftime('%Y-%m-%d.md')}")
         print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Pipeline complete. {results['passed']} jobs ready for review.")
         return results
