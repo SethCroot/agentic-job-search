@@ -49,7 +49,7 @@ def send_discord_summary(results: dict, duration_minutes: float = 0):
 
 **Errors:** {len(results.get('errors', []))}
 
-_Jobs written to inbox: `00-Inbox/` → routed to `06-Career/Jobs/`_
+_Jobs written to inbox: `00-Inbox/` → routed to `06-Career/Jobs/[Company]/[Role]/`_
 _Daily digest: `01-Daily/{datetime.now().strftime('%Y-%m-%d')}.md`_
 
 _Hank (Hermes Agent)_"""

@@ -76,7 +76,7 @@ scoring_reasoning: {_json.dumps(score.get('reasoning', 'N/A'))}
 {str(job.get('description', 'No description available'))[:3000]}
 
 ## Cover Letter
-<!-- Generated on-demand → pushed to Google Drive. Link added here after generation. -->
+<!-- Generated on-demand via `apply-for-job` command. PDFs land in this directory. -->
 
 ## Application Notes
 <!-- Seth's notes -->
@@ -105,7 +105,7 @@ scoring_reasoning: {_json.dumps(score.get('reasoning', 'N/A'))}
 - Jobs scored by LLM: {results.get('scored', 0)}
 - Jobs passing threshold (≥{self.config.scoring_rules.get('threshold', 7.5)}): {results.get('passed', 0)}
 - Cover letters generated: {results.get('cover_letters', 0)}
-- Written to inbox: {results.get('passed', 0)} → /00-Inbox/
+- Written to inbox: {results.get('passed', 0)} → /00-Inbox/ → 06-Career/Jobs/[Company]/[Role]/
 
 ### Top Matches
 """
